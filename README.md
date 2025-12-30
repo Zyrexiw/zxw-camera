@@ -110,4 +110,8 @@ Add these items to your `ox_inventory/data/items.lua`:
 
 ## Support
 
-For issues or questions, please join my discord: https://discord.gg/dJcewbNHbT
+For support or issues, please create an issue on the GitHub repository.
+
+## License
+
+This project is licensed under the MIT License.

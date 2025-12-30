@@ -1,0 +1,40 @@
+['appareil_photo'] = {
+	label = 'Camera',
+	weight = 500,
+	stack = false,
+	close = true,
+	description = 'A camera used to take photos',
+	client = {
+		export = 'zxw_camera.useCamera'
+	}
+},
+
+['photo'] = {
+	label = 'Photo',
+	weight = 50,
+	stack = false,
+	close = true,
+	description = 'A photo taken with a camera',
+	server = {
+		export = 'zxw_visitecard.useCard'
+	},
+	buttons = {
+		{
+			label = 'Show to nearby player',
+			action = function(slot)
+				exports.zxw_visitecard:showCardToNearby(slot)
+			end
+		}
+	}
+},
+
+['photo_folder'] = {
+	label = 'Photo Folder',
+	weight = 200,
+	stack = false,
+	close = true,
+	description = 'A folder used to store your photos',
+	server = {
+		export = 'zxw_camera.usePhotoFolder'
+	}
+},

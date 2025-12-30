@@ -1,0 +1,19 @@
+Locales['fr'] = {
+    ['cannot_use_in_vehicle'] = 'Vous ne pouvez pas utiliser l\'appareil photo dans un véhicule!',
+    ['screencapture_not_started'] = 'Erreur: screencapture n\'est pas démarré',
+    ['discord_webhook_not_configured'] = 'Webhook Discord non configuré',
+    ['no_data_received'] = 'Erreur: Pas de données reçues',
+    ['processing_error'] = 'Erreur lors du traitement',
+    ['photo_taken_success'] = 'Photo prise avec succès!',
+    ['cannot_add_photo'] = 'Impossible d\'ajouter la photo à votre inventaire',
+    ['invalid_response_format'] = 'Erreur: Format de réponse invalide',
+    ['photo_folder'] = 'Dossier photo',
+    ['cannot_open_folder'] = 'Erreur: Impossible d\'ouvrir le dossier photo',
+    ['control_left_click'] = 'Clic gauche',
+    ['control_wheel'] = 'Molette',
+    ['control_backspace'] = 'BACKSPACE',
+    ['control_take_photo'] = 'Prendre une photo',
+    ['control_zoom'] = 'Zoomer',
+    ['control_exit'] = 'Quitter',
+    ['item_not_allowed'] = 'Cet item ne peut pas être stocké dans ce dossier'
+}

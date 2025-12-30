@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: transparent;
+        }
+        
+        #camera-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            display: none; 
+        }
+        
+        #camera-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
+        }
+        
+        #camera-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%),
+                linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.6) 100%);
+        }
+        
+        #camera-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('nui://zxw_camera/html/camera_overlay.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            z-index: 9999;
+            display: none; 
+        }
+        
+        #camera-overlay.show {
+            opacity: 1;
+        }
+        
+        #camera-controls {
+            position: fixed;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            display: none;
+            pointer-events: none;
+            text-align: center;
+        }
+        
+        #camera-controls.show {
+            display: block;
+        }
+        
+        .control-item {
+            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 14px;
+            margin: 0 8px 8px 8px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .control-key {
+            color: #FFD700;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="camera-frame"></div>
+    <div id="camera-overlay"></div>
+    <div id="camera-controls">
+        <div class="control-item"><span class="control-key" id="control-left-click">Clic gauche</span> - <span id="control-take-photo">Prendre une photo</span></div>
+        <div class="control-item"><span class="control-key" id="control-wheel">Molette</span> - <span id="control-zoom">Zoomer</span></div>
+        <div class="control-item"><span class="control-key" id="control-backspace">BACKSPACE</span> - <span id="control-exit">Quitter</span></div>
+    </div>
+    
+    <script>
+        let translations = {};
+        
+        function Translate(key) {
+            return translations[key] || key;
+        }
+        document.addEventListener('mousedown', function(e) {
+            if (e.button === 1) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+        
+        document.addEventListener('mouseup', function(e) {
+            if (e.button === 1) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+        
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        }, true);
+        
+        window.addEventListener('message', function(event) {
+            if (event.data.action === 'showOverlay') {
+                if (event.data.translations) {
+                    translations = event.data.translations;
+                    document.getElementById('control-left-click').textContent = Translate('control_left_click');
+                    document.getElementById('control-wheel').textContent = Translate('control_wheel');
+                    document.getElementById('control-backspace').textContent = Translate('control_backspace');
+                    document.getElementById('control-take-photo').textContent = Translate('control_take_photo');
+                    document.getElementById('control-zoom').textContent = Translate('control_zoom');
+                    document.getElementById('control-exit').textContent = Translate('control_exit');
+                }
+                var overlay = document.getElementById('camera-overlay');
+                var frame = document.getElementById('camera-frame');
+                var controls = document.getElementById('camera-controls');
+                overlay.style.display = 'block';
+                overlay.classList.add('show');
+                frame.style.display = 'block';
+                controls.classList.add('show');
+            } else if (event.data.action === 'hideOverlay') {
+                var overlay = document.getElementById('camera-overlay');
+                overlay.classList.remove('show');
+            } else if (event.data.action === 'hideFrame') {
+                var frame = document.getElementById('camera-frame');
+                var overlay = document.getElementById('camera-overlay');
+                var controls = document.getElementById('camera-controls');
+                frame.style.display = 'none';
+                overlay.style.display = 'none';
+                overlay.classList.remove('show');
+                controls.classList.remove('show');
+            }
+        });
+        
+        function GetParentResourceName() {
+            var resourceName = window.location.hostname;
+            return resourceName;
+        }
+    </script>
+</body>
+</html>
+
