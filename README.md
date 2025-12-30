@@ -2,6 +2,10 @@
 
 A FiveM camera system script that allows players to take photos with a camera item, compatible with zxw_visitecard.
 
+## Preview
+
+[![Video Preview](https://img.youtube.com/vi/H3nK3OGCCbE/maxresdefault.jpg)](https://www.youtube.com/watch?v=H3nK3OGCCbE)
+
 ## Features
 
 - ✅ Camera item usage
@@ -110,8 +114,4 @@ Add these items to your `ox_inventory/data/items.lua`:
 
 ## Support
 
-For support or issues, please create an issue on the GitHub repository.
-
-## License
-
-This project is licensed under the MIT License.
+For issues or questions, please join my discord: https://discord.gg/dJcewbNHbT
